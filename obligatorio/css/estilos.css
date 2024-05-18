@@ -1,0 +1,79 @@
+/*  Agustin Ferres - Nº: 323408 */
+
+
+/* ------------------------------- General ------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    margin: 10px 0;
+}
+
+header, h2, h3 {
+    text-align: center;
+}
+
+h2 {
+    padding: 1rem 0;
+    border-bottom: 1px solid #00000020;
+}
+
+p, h3 {
+    margin: 1rem 0;
+}
+
+div.input-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}
+
+
+/* ------------------------------- Header ------------------------------- */
+
+header {
+    background-color: #f9a370;
+}
+
+header > img {
+    width: 200px;
+    aspect-ratio: 3/1;
+    margin-bottom: 5px;
+}
+
+header > nav > ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* ------------------------------- General Info ------------------------------- */
+
+section#general {
+    background-color: #f6f1db;
+}
+
+section#general > div#profilePicture-container {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+section#general > div#profilePicture-container > img {
+    width: 100px;
+    aspect-ratio: 1/1;
+}
+
+
+section#gestion {
+    background-color: #ffd388;
+}
+
+section#jugar {
+    background-color: #fddac6;
+}

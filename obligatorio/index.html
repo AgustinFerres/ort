@@ -1,0 +1,179 @@
+<!-- Agustin Ferres - Nº: 323408 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/estilos.css">
+    <title>Trivia - Obligiatorio 1</title>
+</head>
+<body>
+    <header>
+        <img src="./img/logo.png" alt="Logo">
+        <nav>
+            <ul>
+                <li><a href="#general">Información General</a></li>
+                <li><a href="#gestion">Administrar</a></li>
+                <li><a href="#jugar">¡Jugar!</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="general">
+            <h2>DESCRIPCÓN GENERAL</h2>
+            <h3>¿Qué encontrarás en este sitio?</h3>
+            <p>
+                En este sitio podrás crear temas, preguntas y jugar a nuestra versión del conocido juego de Trivia.
+            </p>
+            <p>
+                Es una prueba de conocimientos generales con preguntas y respuestas.
+            </p>
+            <p>
+                Cada tema tiene un nombre y una descripción. Cada pregunta es de un tema, tiene un nivel (1-muy fácil, ..., 5-muy difícil), un texto que la describe y te aparecerán varias
+                 respuestas, pero una sola es la correcta. Si la respondes bien, sumas 10 puntos, por cada error pierdes un punto, ¡pero puede usar la ayuda!.
+            </p>
+            <p>
+                El sitio fue desarrollado en el 1er. semestre 2024 - Programación I - Universidad ORT Uruguay por: 
+            </p>
+            <div id="profilePicture-container">
+                <img src="./img/profilePicture.jpg" alt="foto de perfil">
+                <p>
+                    Agustín Ferres - Nº: 323408
+                </p>
+            </div>
+        </section>
+        <section id="gestion">
+            <article>
+            <h2>Gestión de temas</h2>
+                <div>
+                    <h3>Alta de temas</h3>
+                    <form id="formTemas">
+                        <div class="input-container">
+                            <label for="nombreTema">Nombre </label>
+                            <input type="text" id="nombreTema" name="nombreTema" required />
+                        </div>
+                        <div class="input-container">
+                            <label for="descripcionTema">Descripción </label>
+                            <input type="text" id="descripcionTema" name="descripcionTema" required />
+                        </div>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
+                <div>
+                    <h3>Datos generales de temas</h3>
+                    <div>
+                        <p>Lista de temas (total de temas: <span id="temasTotal">0</span>)</p>
+                        <ul id="listaTemas" >
+                            <li>
+                                <p>Sin datos</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas: <span id="promedioPreguntas">sin datos</span>)</p>
+                        <p>Temas sin preguntas:</p>
+                        <ul id="listaTemas" >
+                            <li>
+                                <p>Sin datos</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h2>Gestión de preguntas</h2>
+                <div>
+                    <h3>Alta de preguntas</h3>
+                    <form id="formPreguntas">
+                        <div class="input-container">
+                            <label for="temaPregunta">Tema </label>
+                            <select id="temaPregunta" name="temaPregunta" required>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <label for="nivelPregunta">Nivel </label>
+                            <input type="number" id="nivelPregunta" name="nivelPregunta" required min="1" max="5" />
+                        </div>  
+                        <div class="input-container">
+                            <label for="textoPregunta">Texto de la pregunta </label>
+                            <input type="text" id="textoPregunta" name="textoPregunta" required />
+                        </div>  
+                        <div class="input-container">
+                            <label for="respuestaPregunta">Respuesta Correcta </label>
+                            <input type="text" id="respuestaPregunta" name="respuestaPregunta" required />
+                        </div>  
+                        <div class="input-container">
+                            <label for="respuestaIncorrecta">Respuestas Incorrectas </label>
+                            <input type="text" id="respuestaIncorrecta" name="respuestaIncorrecta" required />
+                        </div>
+                        <button type="submit">Agregar</button>
+                    </form>
+                </div>
+                <div>
+                    <h3>Datos generales de preguntas</h3>
+                    <div>
+                        <p>Total de preguntas registradas: <span id="preguntasTotal">0</span> preguntas</p>
+                        <p>Máximo puntaje obtenido por un jugador: <span id="maximoPuntaje">sin datos</span></p>
+                    </div>
+                    <div>
+                        <p>Preguntas registradas</p>
+                        <div>
+                            <input type="radio" id="asc" name="order" checked/>
+                            <label for="asc">Orden nombre tema creciente/nivel creciente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="desc" name="order" />
+                            <label for="desc">Orden nombre tema decreciente/nivel creciente</label>
+                        </div>
+                    </div>
+                    <table id="tablaPreguntas">
+                        <thead>
+                            <th>Nombre del tema</th>
+                            <th>Nivel</th>
+                            <th>Texto de la pregunta</th>
+                            <th>Respuesta correcta</th>
+                            <th>Respuesta incorrectas</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+        <section id="jugar">
+            <h2>¡A jugar!</h2>
+            <article>
+                <h3>Configuración</h3>
+                <form id="formJugar">
+                    <div class="input-container">
+                        <label for="temaJugar">Tema </label>
+                        <select id="temaJugar" name="temaJugar" required>
+                        </select>
+                    </div>
+                    <div class="input-container">
+                        <label for="nivelPreguntas">Cantidad de preguntas </label>
+                        <input type="number" id="nivelPreguntas" name="nivelPreguntas" required min="1" max="5"/>
+                    </div>
+                    <button type="submit">Jugar</button>
+                </form>
+            </article>
+            <article>
+                <h3>Juego</h3>
+                <p>Puntaje acumulado ene esta Partida: <span id="puntajeActual">0</span></p>
+                <p>La pregunta es...:</p>
+                <p id="textoPreguntaJugar">TEXTO DE LA PREGUNTA</p>
+                <div id="preguntas">
+                    <button>Respuesta 1</button>
+                    <button>Respuesta 2</button>
+                    <button>Respuesta 3</button>
+                </div>
+                <div>
+                    <button type="button">Ayuda</button>
+                    <button type="button">Siguiente Pregunta</button>
+                    <button type="button">Terminar</button>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
