@@ -221,7 +221,7 @@ function executeMain {
       requestInput "Please, enter the vowel" vowel
       ;;
     8)
-      remainingVowels=$(echo "aeiou" | sed "s/[$vowel]//g")
+      remainingVowels=$(echo "aeiou" | awk -F'i' '{print $1$2}')
       searchWord "\b(?=\w*${vowel})(?!\w*[${remainingVowels}])\w+\b" 1
       ;;
     9)
