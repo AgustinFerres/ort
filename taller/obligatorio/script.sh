@@ -12,34 +12,8 @@ GREY='\033[0;37m'                                            # Grey
 NC='\033[0m'                                                 # No Color
 
 # Functions
-function login {
-
-  read -rp "Please, enter your username: " username
-  read -rp "Please, enter your password: " password
-
-  clear # Clear the screen
-  # Check if the user is registered
-
-  for user in $users; do
-    name=$(echo "$user" | awk -F'.' '{print $1}')
-    pass=$(echo "$user" | awk -F'.' '{print $2}')
-
-    if [ "$name" == "$username" ] && [ "$pass" == "$password" ]; then
-      echo "Welcome $username"
-      isLogged=true
-      break
-    fi
-  done
-
-  # If the user is not registered, exit
-  if [ "$isLogged" == false ]; then
-    echo -e "${RED}Invalid username or password"
-    exit 1
-  fi
-}
-
 function calculatePercentage {
-  result=$(($1 * 10000 / $2))                                  # Calculate the percentage
+  result=$(($1 * 10000 / $2))                                  # Calculate the percentage, multiplying by 10000 to get 2 decimal places
   integer_part=$((result / 100))                               # Get the integer part
   fractional_part=$((result % 100))                            # Get the fractional part, by getting the remainder
   printf "%s.%02d %s\n" "$integer_part" "$fractional_part" "%" # Return the result
@@ -93,6 +67,32 @@ function requestInput {
   showSuccess "$message set to: $input_value"
 }
 
+function login {
+
+  read -rp "Please, enter your username: " username
+  read -rp "Please, enter your password: " password
+
+  clear # Clear the screen
+
+  # Check if the user is registered
+  for user in $users; do
+    name=$(echo "$user" | awk -F'.' '{print $1}')
+    pass=$(echo "$user" | awk -F'.' '{print $2}')
+
+    if [ "$name" == "$username" ] && [ "$pass" == "$password" ]; then
+      echo "Welcome $username"
+      isLogged=true
+      break
+    fi
+  done
+
+  # If the user is not registered, exit
+  if [ "$isLogged" == false ]; then
+    showError "Invalid username or password"
+    exit 1
+  fi
+}
+
 function generateMenu {
   setColor "$GREY"
   echo "----------------------------------------------   Menu   ------------------------------------------------------"
@@ -132,9 +132,7 @@ function createUser {
     name=$(echo "$user" | awk -F'.' '{print $1}')
 
     if [ "$name" == "$newUsername" ]; then
-      setColor "$RED" # Set color to red
-      echo "The user already exists"
-      setColor "$NC" # Reset color
+      showError "The user already exists"
       userExists=true
       break
     fi
@@ -184,9 +182,7 @@ function searchWord {
     wordsThatMatch=$(grep -Ex "$1" <<<"$dicc") # Get the words that match the regex, -E to use extended regex, -x to match the whole line
   fi
 
-  setColor "$GREEN" # Set color to green
-  echo "Matching words:"
-  setColor "$NC"              # Reset color
+  showSuccess "Matching words:"
   echo "${wordsThatMatch[@]}" # Print the words that match the regex
 
   date=$(date +"%Y-%m-%d %H:%M:%S")                            # Get the current date
@@ -195,6 +191,7 @@ function searchWord {
   percentage=$(calculatePercentage "$cantWords" "$totalWords") # Calculate the percentage of words that match the regex
 
   if [ -z "$wordsThatMatch" ]; then
+    clear
     showError "No words match"
   else
     header="       Date         | Amount of words | Total words | Percentage |     User     |          Regex           |    Regex Explained" # Header of the log file
@@ -220,7 +217,7 @@ function revertWord {
 }
 
 function executeMain {
-  export LC_ALL=C.UTF-8 # Set the locale to UTF-8
+  export LC_ALL=C.UTF-8 # Set the locale to UTF-8, for perl regex to work
   login                 # Call the login function
   while true; do        # Infinite loop to show the menu after each option
     # Print menu
@@ -337,5 +334,3 @@ function executeMain {
 }
 
 executeMain
-
-#explainRegex 1
