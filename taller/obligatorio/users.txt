@@ -3,3 +3,4 @@ user / 1234
 test / 1234
 agus / 1234
 jona / 1234
+dami / 1234

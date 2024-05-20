@@ -38,22 +38,6 @@ function login {
   fi
 }
 
-function requestInput {
-  message=$(awk -F'the ' '{print $2}' <<<"$1") # Get the success message from the argument
-  message=${message^}                          # Capitalize the first letter of the message
-
-  clear                        # Clear the screen
-  setColor "$BLUE"             # Set color to blue
-  read -rp "$1: " input_value  # Request input with the message passed as argument, and store it in the variable passed as argument
-  declare -g "$2=$input_value" # Set the variable passed as argument with the value entered by the user
-  setColor "$NC"               # Reset color
-  clear                        # Clear the screen
-
-  setColor "$GREEN" # Set color to green
-  echo "$message set to: $input_value"
-  setColor "$NC" # Reset color
-}
-
 function calculatePercentage {
   result=$(($1 * 10000 / $2))                                  # Calculate the percentage
   integer_part=$((result / 100))                               # Get the integer part
@@ -83,6 +67,32 @@ function setColor {
   echo -en "$1" # Set color to the argument passed
 }
 
+function showSuccess {
+  setColor "$GREEN" # Set color to green
+  echo "$1"         # Print the success message
+  setColor "$NC"    # Reset color
+}
+
+function showError {
+  setColor "$RED" # Set color to red
+  echo "$1"       # Print the error message
+  setColor "$NC"  # Reset color
+}
+
+function requestInput {
+  message=$(awk -F'the ' '{print $2}' <<<"$1") # Get the success message from the argument
+  message=${message^}                          # Capitalize the first letter of the message
+
+  clear                        # Clear the screen
+  setColor "$BLUE"             # Set color to blue
+  read -rp "$1: " input_value  # Request input with the message passed as argument, and store it in the variable passed as argument
+  declare -g "$2=$input_value" # Set the variable passed as argument with the value entered by the user
+  setColor "$NC"               # Reset color
+  clear                        # Clear the screen
+
+  showSuccess "$message set to: $input_value"
+}
+
 function generateMenu {
   setColor "$GREY"
   echo "----------------------------------------------   Menu   ------------------------------------------------------"
@@ -96,9 +106,8 @@ function generateMenu {
 }
 
 function listUsers {
-  setColor "$GREEN"
-  echo "Users:"
-  setColor "$NC"
+  clear # Clear the screen
+  showSuccess "Users:"
 
   # Print users
   for user in $users; do
@@ -112,7 +121,7 @@ function listUsers {
 }
 
 function createUser {
-  setColor "BLUE" # Set color to blue
+  setColor "$BLUE" # Set color to blue
   read -rp "Please, enter the name of the user: " newUsername
   read -rp "Please, enter the password of the user: " newPassword
 
@@ -136,23 +145,43 @@ function createUser {
     printf "%s / %s" "$newUsername" "$newPassword" >>"./users.txt" # Add the new user to the file
     users=$(cat "./users.txt" | awk -F' / ' '{print $1 "." $2}')   # Update users array
 
-    setColor "$GREEN" # Set color to green
-    echo "User created successfully"
-    setColor "$NC" # Reset color
+    showSuccess "User created successfully"
   fi
 
   echo "" # Empty line
 }
 
+function explainRegex {
+
+  regexExplanation="Words that "
+  if [ "$1" == "1" ]; then
+    # Check if the vowel is set, and add it to the explanation
+    regexExplanation="$regexExplanation only have the vowel $vowel"
+  else
+    # Check if the start letter is set, and add it to the explanation
+    [ -n "$startLetter" ] && regexExplanation="${regexExplanation}start with $startLetter"
+    # Check if the contained letter is set, and add it to the explanation, adding a comma if the start letter is set
+    [ -n "$containedLetter" ] && regexExplanation="$regexExplanation${startLetter:+, }contain $containedLetter"
+    # Check if the end letter is set, and add it to the explanation, adding a and if the start letter or contained letter is set
+    andConnector=""
+    [ -n "$startLetter" ] || [ -n "$containedLetter" ] && andConnector=" and "
+    [ -n "$endLetter" ] && regexExplanation="${regexExplanation}${andConnector}end with $endLetter"
+  fi
+
+  [ "$regexExplanation" == "Words that " ] && regexExplanation="All words" # Check if the explanation is empty, and set it to "All words"
+
+  echo "$regexExplanation"
+}
+
 function searchWord {
   clear # Clear the screen
 
-  dicc=$(cat "./diccionario.txt") # Get the words from the file
+  dicc=$(cat "./diccionario.txt") # Get the words from the file, removing the spaces
 
   if [ "$2" -eq 1 ]; then
-    wordsThatMatch=$(grep -P "$1" <<<"$dicc") # Get the words that match the regex
+    wordsThatMatch=$(grep -Px "$1" <<<"$dicc") # Get the words that match the regex, -P to use Perl regex, -x to match the whole line
   else
-    wordsThatMatch=$(grep -E "$1" <<<"$dicc") # Get the words that match the regex
+    wordsThatMatch=$(grep -Ex "$1" <<<"$dicc") # Get the words that match the regex, -E to use extended regex, -x to match the whole line
   fi
 
   setColor "$GREEN" # Set color to green
@@ -161,22 +190,21 @@ function searchWord {
   echo "${wordsThatMatch[@]}" # Print the words that match the regex
 
   date=$(date +"%Y-%m-%d %H:%M:%S")                            # Get the current date
-  cantWords=$(wc -l <<<"$wordsThatMatch")                      # Get the amount of words that match the regex
-  totalWords=$(wc -l <<<"$dicc")                               # Get the total amount of words
+  cantWords=$(wc -l <<<"$wordsThatMatch")                      # Get the amount of words that match the regex, by counting the lines
+  totalWords=$(wc -l <<<"$dicc")                               # Get the total amount of words, by counting the lines
   percentage=$(calculatePercentage "$cantWords" "$totalWords") # Calculate the percentage of words that match the regex
 
   if [ -z "$wordsThatMatch" ]; then
-    setColor "$RED" # Set color to red
-    echo "No words match"
-    setColor "$NC" # Reset color
+    showError "No words match"
   else
-    header="       Date         | Amount of words | Total words | Percentage |     User     |   Regex    " # Header of the log file
-    if [ ! -f "./log.txt" ]; then                                                                          # Check if the log file exists
-      echo "$header" >>"./log.txt"                                                                         # Create the log file with the header
+    header="       Date         | Amount of words | Total words | Percentage |     User     |          Regex           |    Regex Explained" # Header of the log file
+    if [ ! -f "./log.txt" ]; then                                                                                                            # Check if the log file exists
+      echo "$header" >>"./log.txt"                                                                                                           # Create the log file with the header
     fi
 
+    regexExplanation=$(explainRegex "$2")
     # Add the log to the file
-    echo "$date | $(formatWord "$cantWords" 15) | $(formatWord "$totalWords" 11) | $(formatWord "$percentage" 10) | $(formatWord "$username" 12) | $1 " >>"./log.txt"
+    echo "$date | $(formatWord "$cantWords" 15) | $(formatWord "$totalWords" 11) | $(formatWord "$percentage" 10) | $(formatWord "$username" 12) | $(formatWord "$1" 24) | $regexExplanation " >>"./log.txt"
   fi
 }
 
@@ -207,22 +235,53 @@ function executeMain {
       ;;
     3)
       requestInput "Please, enter the start letter" startLetter
+      if [ "${#startLetter}" -ne 1 ] && [ -n "$startLetter" ]; then
+        clear # Clear the screen
+        showError "It must be a single letter"
+        startLetter="" # Reset the start letter
+        continue       # Exit to the menu
+      fi
       ;;
     4)
       requestInput "Please, enter the end letter" endLetter
+      if [ "${#endLetter}" -ne 1 ] && [ -n "$endLetter" ]; then
+        clear # Clear the screen
+        showError "It must be a single letter"
+        endLetter="" # Reset the end letter
+        continue     # Exit to the menu
+      fi
       ;;
     5)
       requestInput "Please, enter the contained letter" containedLetter
+      if [ "${#containedLetter}" -ne 1 ] && [ -n "$containedLetter" ]; then
+        clear # Clear the screen
+        showError "It must be a single letter"
+        containedLetter="" # Reset the contained letter
+        continue           # Exit to the menu
+      fi
       ;;
     6)
-      searchWord "\b^${startLetter}.*${containedLetter}.*${endLetter}$\b"
+      searchWord "^${startLetter}.*${containedLetter}.*${endLetter}$"
       ;;
     7)
       requestInput "Please, enter the vowel" vowel
+      if [[ ! "$vowel" =~ ^[aeiou]$ ]]; then
+        clear # Clear the screen
+        showError "It must be a vowel"
+        vowel="" # Reset the vowel
+        continue # Exit to the menu
+      fi
+
       ;;
     8)
-      remainingVowels=$(echo "aeiou" | awk -F'i' '{print $1$2}')
-      searchWord "\b(?=\w*${vowel})(?!\w*[${remainingVowels}])\w+\b" 1
+      if [ -z "$vowel" ]; then
+        setColor "$RED" # Set color to red
+        echo "A vowel must be set to do this operation"
+        setColor "$NC" # Reset color
+        continue       # Exit to the menu
+      fi
+      remainingVowels=$(echo "aeiou" | awk -F"${vowel}" '{print $1$2}') # Get the remaining vowels
+      searchWord "(?=\w*${vowel})(?!\w*[${remainingVowels}])\w+" 1
       ;;
     9)
       requestInput "Please, enter the quantity of inputs" qNumbers # Request the quantity of inputs
@@ -251,7 +310,7 @@ function executeMain {
       ;;
     10)
       requestInput "Please, enter the word" word # Request word to check
-      invertedWord=$(revertWord "$word")             # Reverse the word
+      invertedWord=$(revertWord "$word")         # Reverse the word
 
       clear
 
@@ -278,3 +337,5 @@ function executeMain {
 }
 
 executeMain
+
+#explainRegex 1

@@ -1,7 +1,7 @@
-       Date         | Amount of words | Total words | Percentage |     User     |   Regex    
-2024-05-18 19:09:25 |              40 |     174847 |      0.02 % |        admin | \b^a.*.*d$\b 
-2024-05-18 19:09:33 |              12 |     174847 |      0.00 % |        admin | \b^a.*s.*d$\b 
-2024-05-18 19:09:58 |             297 |     174847 |      0.16 % |        admin | \b^z.*.*$\b 
-2024-05-18 19:10:07 |             778 |     174847 |      0.44 % |        admin | \b(?=\w*e)(?!\w*[aiou])\w+\b 
-2024-05-18 20:14:14 |            2698 |     174847 |      1.54 % |        admin | \b(?=\w*a)(?!\w*[eiou])\w+\b 
-2024-05-19 18:51:15 |              84 |      174847 |     0.04 % |        admin | \b(?=\w*i)(?!\w*[aeou])\w+\b 
+       Date         | Amount of words | Total words | Percentage |     User     |          Regex           |    Regex Explained
+2024-05-19 23:17:58 |           20772 |      174847 |    11.88 % |        admin |                  ^a.*.*$ | Words that start with a 
+2024-05-19 23:18:04 |              43 |      174847 |     0.02 % |        admin |                 ^a.*.*d$ | Words that start with a and end with d 
+2024-05-19 23:18:10 |             635 |      174847 |     0.36 % |        admin |                  ^.*.*d$ | Words that  end with d 
+2024-05-19 23:18:22 |             217 |      174847 |     0.12 % |        admin |                 ^.*c.*d$ | Words that contain c and end with d 
+2024-05-19 23:18:32 |           67018 |      174847 |    38.32 % |        admin |                  ^.*c.*$ | Words that contain c 
+2024-05-19 23:18:36 |             751 |      174847 |     0.42 % |        admin | (?=\w*e)(?!\w*[aiou])\w+ | Words that  only have the vowel e 
