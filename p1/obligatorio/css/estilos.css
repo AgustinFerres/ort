@@ -32,7 +32,6 @@ div.input-container {
     width: 400px;
 }
 
-
 /* ------------------------------- Header ------------------------------- */
 
 header {
@@ -69,11 +68,79 @@ section#general > div#profilePicture-container > img {
     aspect-ratio: 1/1;
 }
 
+/* ------------------------------- Gestion ------------------------------- */
 
 section#gestion {
     background-color: #ffd388;
 }
 
+form {
+    display: flex;
+    gap: 5px;
+}
+
+form#formPreguntas {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(5, 400px);
+}
+
+form#formPreguntas > div {
+    grid-row: 2;
+}
+
+form#formPreguntas div:nth-child(1),
+form#formPreguntas div:nth-child(2) {
+    grid-row: 1;
+}
+
+form#formPreguntas > button {
+    grid-row: 2;
+    width: 20%;
+}
+
+div#tableOrder {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    background-color: #f3f1f2;
+    border: 1px solid #000;
+}
+
+/* ------------------------------- Jugar ------------------------------- */
+
 section#jugar {
     background-color: #fddac6;
+}
+
+p#textoPreguntaJugar, div#preguntas > button {
+    background-color: #e17c24;
+    color: #fff;
+    padding: 5px;
+}
+
+p#textoPreguntaJugar {
+    text-align: center;
+}
+
+section#jugar > article > div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+div#preguntas {
+    margin-bottom: 20px;
+}
+
+div#preguntas > button {
+    appearance: none;
+    border: 0;
 }

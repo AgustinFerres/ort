@@ -30,3 +30,12 @@ function ejercicio3 () {
 }
 
 const prueba = "dasda"
+
+
+function elementsLength (array) {
+    return array.map(str => str.length);
+}
+
+function prizesToChange (array, points) {
+    return array.map(prize => points >= prize.points && prize);
+}

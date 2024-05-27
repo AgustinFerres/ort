@@ -5,3 +5,4 @@
 2024-05-19 23:18:22 |             217 |      174847 |     0.12 % |        admin |                 ^.*c.*d$ | Words that contain c and end with d 
 2024-05-19 23:18:32 |           67018 |      174847 |    38.32 % |        admin |                  ^.*c.*$ | Words that contain c 
 2024-05-19 23:18:36 |             751 |      174847 |     0.42 % |        admin | (?=\w*e)(?!\w*[aiou])\w+ | Words that  only have the vowel e 
+2024-05-20 11:57:23 |           20772 |      174847 |    11.88 % |        admin |                  ^a.*.*$ | Words that start with a 
