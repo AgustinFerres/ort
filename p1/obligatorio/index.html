@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <title>Trivia - Obligiatorio 1</title>
+    <script defer src="js/datosPrueba.js"></script>
+    <script defer src="js/clases.js"></script>
+    <script defer src="js/funciones.js"></script>
 </head>
 <body>
     <header>
@@ -33,7 +36,7 @@
                  respuestas, pero una sola es la correcta. Si la respondes bien, sumas 10 puntos, por cada error pierdes un punto, ¡pero puede usar la ayuda!.
             </p>
             <p>
-                El sitio fue desarrollado en el 1er. semestre 2024 - Programación I - Universidad ORT Uruguay por: 
+                El sitio fue desarrollado en el 1er. semestre 2024 - Programación I - Universidad ORT Uruguay por:
             </p>
             <div id="profilePicture-container">
                 <img src="img/profilePicture.jpg" alt="foto de perfil">
@@ -62,7 +65,7 @@
                 <div>
                     <h3>Datos generales de temas</h3>
                     <div>
-                        <p>Lista de temas (total de temas: <span id="temasTotal">0</span>)</p>
+                        <p>Lista de temas (total de temas: <span id="temasTotal">0</span>):</p>
                         <ul id="listaTemas" >
                             <li>
                                 <p>Sin datos</p>
@@ -70,9 +73,9 @@
                         </ul>
                     </div>
                     <div>
-                        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas: <span id="promedioPreguntas">sin datos</span>)</p>
+                        <p>Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): <span id="promedioPreguntas">sin datos</span></p>
                         <p>Temas sin preguntas:</p>
-                        <ul id="listaPreguntas" >
+                        <ul id="listaTemasSinPreguntas" >
                             <li>
                                 <p>Sin datos</p>
                             </li>
@@ -93,18 +96,18 @@
                         <div class="input-container">
                             <label for="nivelPregunta">Nivel </label>
                             <input type="number" id="nivelPregunta" name="nivelPregunta" required min="1" max="5" />
-                        </div>  
+                        </div>
                         <div class="input-container">
                             <label for="textoPregunta">Texto de la pregunta </label>
                             <input type="text" id="textoPregunta" name="textoPregunta" required />
-                        </div>  
+                        </div>
                         <div class="input-container">
                             <label for="respuestaPregunta">Respuesta Correcta </label>
                             <input type="text" id="respuestaPregunta" name="respuestaPregunta" required />
-                        </div>  
+                        </div>
                         <div class="input-container">
-                            <label for="respuestaIncorrecta">Respuestas Incorrectas </label>
-                            <input type="text" id="respuestaIncorrecta" name="respuestaIncorrecta" required />
+                            <label for="respuestasIncorrectas">Respuestas Incorrectas </label>
+                            <input type="text" id="respuestasIncorrectas" name="respuestasIncorrectas" required />
                         </div>
                         <button type="submit">Agregar</button>
                     </form>
@@ -153,29 +156,28 @@
                         </select>
                     </div>
                     <div class="input-container">
-                        <label for="nivelPreguntas">Cantidad de preguntas </label>
+                        <label for="nivelPreguntas">Nivel del juego</label>
                         <input type="number" id="nivelPreguntas" name="nivelPreguntas" required min="1" max="5"/>
                     </div>
                     <button type="submit">Jugar</button>
                 </form>
             </article>
-            <article>
+            <article id="jugarPreguntas">
                 <h3>Juego</h3>
-                <p>Puntaje acumulado ene esta Partida: <span id="puntajeActual">0</span></p>
+                <p>Puntaje acumulado en esta Partida: <span id="puntajeActual">0</span></p>
                 <p>La pregunta es...:</p>
                 <p id="textoPreguntaJugar">TEXTO DE LA PREGUNTA</p>
-                <div id="preguntas">
-                    <button>Respuesta 1</button>
-                    <button>Respuesta 2</button>
-                    <button>Respuesta 3</button>
+                <div id="respuestasJugar">
                 </div>
                 <div>
-                    <button type="button">Ayuda</button>
-                    <button type="button">Siguiente Pregunta</button>
-                    <button type="button">Terminar</button>
+                    <button type="button" id="ayuda">Ayuda</button>
+                    <button type="button" id="siguiente">Siguiente Pregunta</button>
+                    <button type="button" id="terminar">Terminar</button>
                 </div>
             </article>
         </section>
     </main>
+    <audio id="correct" src="audio/correct.mp3"></audio>
+    <audio id="wrong" src="audio/wrong.mp3"></audio>
 </body>
 </html>

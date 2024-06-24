@@ -72,6 +72,15 @@ section#general > div#profilePicture-container > img {
 
 section#gestion {
     background-color: #ffd388;
+    display: none;
+}
+
+#listaTemas, #listaTemasSinPreguntas {
+    padding: 0 2rem;
+}
+
+#listaTemas > li > p, #listaTemasSinPreguntas > li > p {
+    margin: 0;
 }
 
 form {
@@ -109,7 +118,7 @@ table {
     width: 100%;
 }
 
-th {
+th, tr {
     background-color: #f3f1f2;
     border: 1px solid #000;
 }
@@ -118,16 +127,24 @@ th {
 
 section#jugar {
     background-color: #fddac6;
+    display: none;
 }
 
-p#textoPreguntaJugar, div#preguntas > button {
+section#jugar > article#jugarPreguntas {
+    display: none;
+    padding: 0 0 1rem 0;
+}
+
+p#textoPreguntaJugar, div#respuestasJugar > button {
     background-color: #e17c24;
     color: #fff;
-    padding: 5px;
+    padding: 1rem 2rem;
+    border: 1px solid black;
 }
 
 p#textoPreguntaJugar {
     text-align: center;
+    margin: 2rem;
 }
 
 section#jugar > article > div {
@@ -136,11 +153,10 @@ section#jugar > article > div {
     gap: 10px;
 }
 
-div#preguntas {
+div#respuestasJugar {
     margin-bottom: 20px;
 }
 
-div#preguntas > button {
+div#respuestasJugar > button {
     appearance: none;
-    border: 0;
 }
