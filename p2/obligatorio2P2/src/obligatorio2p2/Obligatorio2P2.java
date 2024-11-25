@@ -4,17 +4,17 @@
  */
 package obligatorio2p2;
 
+import obligatorio2p2.gui.MainWindow;
+
+
 /**
- *
- * @author YO
+ * @author Agustin Ferres - n° 323408
  */
 public class Obligatorio2P2 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main ( String[] args ) {
+
+        new MainWindow();
     }
-    
+
 }
