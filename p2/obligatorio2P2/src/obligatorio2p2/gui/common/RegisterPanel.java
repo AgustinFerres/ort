@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterPanel extends JPanel {
 
     public RegisterPanel (

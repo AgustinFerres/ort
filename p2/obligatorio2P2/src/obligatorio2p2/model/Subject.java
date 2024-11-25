@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public abstract class Subject {
 
     private transient final Map<ObserverType, Set<Observer>> observers = new HashMap<>();

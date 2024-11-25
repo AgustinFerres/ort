@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterSaleWindow extends Window {
 
     private final SaleController controller;
@@ -178,6 +181,7 @@ public class RegisterSaleWindow extends Window {
     }
 
     private void onAdd () {
+
         Book book = bookList.getSelectedValue();
 
         if ( book == null ) {
@@ -203,17 +207,23 @@ public class RegisterSaleWindow extends Window {
     }
 
     private void onRegister () {
+
         Date date;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             date = dateFormat.parse(dateField.getText());
-        } catch ( ParseException e) {
+        } catch ( ParseException e ) {
             JOptionPane.showMessageDialog(null, "La fecha ingresada no es válida", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if ( sale.getBooks().isEmpty() ) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un libro", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null,
+                "Debe seleccionar al menos un libro",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 
@@ -231,6 +241,7 @@ public class RegisterSaleWindow extends Window {
     }
 
     private void clearFields () {
+
         dateField.setText("");
         clientField.setText("");
         bookList.clearSelection();
@@ -253,7 +264,8 @@ public class RegisterSaleWindow extends Window {
 
         if ( sale.getBooks() != null ) {
             Map<Book, Integer> books = sale.getBooks();
-            selectedBooks.setListData(books.entrySet().stream().map(e -> BookDTO.of(e.getKey(), e.getValue())).toArray(BookDTO[]::new));
+            selectedBooks.setListData(books.entrySet().stream().map(e -> BookDTO.of(e.getKey(), e.getValue())).toArray(
+                BookDTO[]::new));
         } else {
             selectedBooks.setListData(new BookDTO[0]);
         }

@@ -6,6 +6,9 @@ import obligatorio2p2.service.EditorialService;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class EditorialController {
 
     private final EditorialService editorialService;

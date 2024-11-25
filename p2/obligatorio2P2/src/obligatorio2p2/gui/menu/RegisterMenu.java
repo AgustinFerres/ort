@@ -8,6 +8,9 @@ import obligatorio2p2.gui.window.RegisterGenreWindow;
 import javax.swing.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterMenu extends JMenu {
 
     public RegisterMenu () {

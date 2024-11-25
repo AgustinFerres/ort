@@ -6,6 +6,9 @@ import obligatorio2p2.model.Sale;
 import java.util.Date;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class BookSaleDTO {
     private Date date;
     private String client;

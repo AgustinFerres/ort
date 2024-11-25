@@ -18,13 +18,15 @@ public class SaleService extends Service {
         super();
     }
 
-    public void registerSale (Sale sale) throws IllegalArgumentException {
+    public void registerSale ( Sale sale ) throws IllegalArgumentException {
+
         this.validateStock(sale);
 
         database.saveSale(sale);
     }
 
     public int getNewId () {
+
         return database.getSales().size() + 1;
     }
 
@@ -85,7 +87,7 @@ public class SaleService extends Service {
 
             if ( !book.hasStock() ) { // If there is no stock, remove the book from the sale
                 outOfStock.add(book);
-                for ( int i = 0; i < quantity; i++ ) {
+                for ( int i = 0 ; i < quantity ; i++ ) {
                     sale.removeBook(book);
                 }
             } else if ( book.getStock() < quantity ) { // If there is not enough stock, adjust the quantity to the available stock

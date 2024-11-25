@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterAuthorWindow extends Window {
 
     private final AuthorController controller;

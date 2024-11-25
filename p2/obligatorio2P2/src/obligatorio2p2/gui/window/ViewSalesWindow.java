@@ -6,7 +6,6 @@ import obligatorio2p2.dto.BookSaleDTO;
 import obligatorio2p2.gui.common.Button;
 import obligatorio2p2.gui.common.Input;
 import obligatorio2p2.gui.common.Window;
-import obligatorio2p2.model.Author;
 import obligatorio2p2.model.Book;
 import obligatorio2p2.types.ObserverType;
 
@@ -19,6 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class ViewSalesWindow extends Window {
 
     private final SaleController controller;
@@ -60,6 +62,7 @@ public class ViewSalesWindow extends Window {
 
     @Override
     public void update () {
+
         updateBookList();
     }
 
@@ -70,6 +73,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private JPanel getSearchPanel () {
+
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
         searchPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
@@ -98,6 +102,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private JPanel getDataPanel () {
+
         JPanel dataPanel = new JPanel();
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
 
@@ -118,6 +123,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private JPanel getTotalsPanel () {
+
         JPanel totalsPanel = new JPanel();
         totalsPanel.setLayout(new GridLayout(2, 3));
 
@@ -141,6 +147,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private void onMore () {
+
         dialog = new JDialog(this, "Select Book", true);
         dialog.setSize(300, 400);
         dialog.setLocationRelativeTo(this);
@@ -152,12 +159,12 @@ public class ViewSalesWindow extends Window {
         JScrollPane scrollPane = new JScrollPane(bookList);
 
 
-
         dialog.add(scrollPane);
         dialog.setVisible(true);
     }
 
     private void onSelect () {
+
         Book book = bookList.getSelectedValue();
         if ( book == null ) {
             return;
@@ -168,6 +175,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private void onSearch () {
+
         if ( isbnField.getText().isEmpty() ) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un ISBN", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -177,7 +185,8 @@ public class ViewSalesWindow extends Window {
         updateTable();
     }
 
-    private void onExport() {
+    private void onExport () {
+
         List<BookSaleDTO> sales = controller.getSalesByISBN(isbnField.getText());
 
         if ( sales.isEmpty() ) {
@@ -185,9 +194,9 @@ public class ViewSalesWindow extends Window {
             return;
         }
 
-        try ( FileWriter writer = new FileWriter("ventas.csv")) {
+        try ( FileWriter writer = new FileWriter("ventas.csv") ) {
             writer.append("Fecha;Cliente;Factura;Cantidad;Precio;Importe\n");
-            for (BookSaleDTO sale : sales) {
+            for ( BookSaleDTO sale : sales ) {
                 writer.append(sale.getDate().toString()).append(';')
                       .append(sale.getClient()).append(';')
                       .append(sale.getId().toString()).append(';')
@@ -196,12 +205,13 @@ public class ViewSalesWindow extends Window {
                       .append(sale.getTotal().toString()).append('\n');
             }
             JOptionPane.showMessageDialog(this, "Exportación exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } catch ( IOException e) {
+        } catch ( IOException e ) {
             JOptionPane.showMessageDialog(this, "Error al exportar los datos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void updateTable () {
+
         List<BookSaleDTO> sales = controller.getSalesByISBN(isbnField.getText());
         model.setRowCount(0);
         for ( BookSaleDTO sale : sales ) {
@@ -221,6 +231,7 @@ public class ViewSalesWindow extends Window {
     }
 
     private void updateBookList () {
+
         Set<Book> books = bookController.getBooks();
         bookList.setListData(books.toArray(new Book[0]));
     }

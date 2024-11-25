@@ -6,6 +6,9 @@ import obligatorio2p2.service.GenreService;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class GenreController {
 
     private final GenreService genreService;

@@ -146,7 +146,7 @@ public class Book implements Serializable {
     @Override
     public boolean equals ( Object obj ) {
 
-        return obj instanceof Book && ((Book) obj).isbn.equals(isbn);
+        return obj instanceof Book && ( (Book) obj ).isbn.equals(isbn);
     }
 
     @Override

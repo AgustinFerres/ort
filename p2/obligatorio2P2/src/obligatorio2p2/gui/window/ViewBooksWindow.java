@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class ViewBooksWindow extends Window {
 
     private final BookController controller;

@@ -6,6 +6,9 @@ import obligatorio2p2.service.AuthorService;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class AuthorController {
 
     private final AuthorService authorService;

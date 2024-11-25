@@ -8,6 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public abstract class Window extends JFrame implements Observer {
 
     public Window ( String title ) {

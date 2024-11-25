@@ -6,6 +6,9 @@ import obligatorio2p2.gui.window.ViewSalesWindow;
 import javax.swing.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class ViewMenu extends JMenu {
 
     public ViewMenu () {

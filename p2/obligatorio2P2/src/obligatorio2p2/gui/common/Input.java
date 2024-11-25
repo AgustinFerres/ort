@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class Input extends JPanel {
 
     private JLabel label;

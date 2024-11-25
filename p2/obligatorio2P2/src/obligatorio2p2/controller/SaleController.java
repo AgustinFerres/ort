@@ -1,15 +1,16 @@
 package obligatorio2p2.controller;
 
 import obligatorio2p2.dto.BookSaleDTO;
-import obligatorio2p2.model.Book;
 import obligatorio2p2.model.Sale;
 import obligatorio2p2.service.SaleService;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class SaleController {
 
     private final SaleService service;
@@ -25,6 +26,7 @@ public class SaleController {
     }
 
     public int getNewId () {
+
         return service.getNewId();
     }
 
@@ -44,6 +46,7 @@ public class SaleController {
     }
 
     public void disableSale ( Integer id ) {
+
         service.disableSale(id);
     }
 }

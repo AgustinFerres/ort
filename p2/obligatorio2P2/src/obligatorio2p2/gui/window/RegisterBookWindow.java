@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterBookWindow extends Window {
 
     private final BookController controller;
@@ -248,6 +251,7 @@ public class RegisterBookWindow extends Window {
     }
 
     private void clearFields () {
+
         editorialList.clearSelection();
         genreList.clearSelection();
         authorList.clearSelection();

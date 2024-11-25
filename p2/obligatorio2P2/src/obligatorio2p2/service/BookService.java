@@ -112,7 +112,7 @@ public class BookService extends Service {
         File destinationFile = new File(imagesDir, isbn + getFileExtension(image));
         try {
             Files.copy(image.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch ( IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
             return null;
         }

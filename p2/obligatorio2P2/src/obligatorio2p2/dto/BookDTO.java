@@ -3,6 +3,9 @@ package obligatorio2p2.dto;
 import obligatorio2p2.model.Book;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class BookDTO {
 
     private String isbn;
@@ -10,7 +13,10 @@ public class BookDTO {
     private Integer qty;
     private Double price;
 
-    public static BookDTO of ( Book book, Integer qty ) {
+    public static BookDTO of (
+        Book book,
+        Integer qty
+    ) {
 
         BookDTO dto = new BookDTO();
         dto.isbn = book.getIsbn();
@@ -22,6 +28,7 @@ public class BookDTO {
     }
 
     public String getIsbn () {
+
         return isbn;
     }
 

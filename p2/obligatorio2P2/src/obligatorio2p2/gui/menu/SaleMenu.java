@@ -6,6 +6,9 @@ import obligatorio2p2.gui.window.RegisterSaleWindow;
 import javax.swing.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class SaleMenu extends JMenu {
 
     public SaleMenu () {

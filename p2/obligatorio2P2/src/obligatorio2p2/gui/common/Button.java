@@ -11,7 +11,10 @@ public class Button extends JPanel {
 
     private JButton button;
 
-    public Button ( String text, Dimension size ) {
+    public Button (
+        String text,
+        Dimension size
+    ) {
 
         super();
 

@@ -13,9 +13,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class DisableSaleWindow extends Window {
 
     private final SaleController controller;
@@ -79,10 +81,11 @@ public class DisableSaleWindow extends Window {
     }
 
     private void onSearch () {
+
         try {
             int id = Integer.parseInt(idField.getText());
             sale = controller.getSale(id);
-            if (sale == null) {
+            if ( sale == null ) {
                 JOptionPane.showMessageDialog(this, "No se encontró la venta", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -109,7 +112,12 @@ public class DisableSaleWindow extends Window {
 
     private void onDisable () {
 
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea anular la venta?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro que desea anular la venta?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION
+        );
 
         if ( confirm != JOptionPane.YES_OPTION ) {
             return;
@@ -127,6 +135,7 @@ public class DisableSaleWindow extends Window {
     }
 
     private void clearFields () {
+
         idField.setText("");
         saleModel.setRowCount(0);
         bookModel.setRowCount(0);
@@ -134,6 +143,7 @@ public class DisableSaleWindow extends Window {
     }
 
     private void initializeDataPanel () {
+
         dataPanel = new JPanel();
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
 

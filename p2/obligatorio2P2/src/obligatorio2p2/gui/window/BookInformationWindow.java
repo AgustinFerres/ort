@@ -10,12 +10,18 @@ import java.awt.*;
 import java.util.List;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class BookInformationWindow extends Window {
 
     public BookInformationWindow ( Book book ) {
 
         super("Información de libro");
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"ISBN", "Título", "Autor", "Género", "Costo", "Precio", "Stock"}, 0);
+        DefaultTableModel model = new DefaultTableModel(
+            new Object[]{"ISBN", "Título", "Autor", "Género", "Costo", "Precio", "Stock"},
+            0
+        );
         model.addRow(new Object[]{
             book.getIsbn(),
             book.getTitle(),

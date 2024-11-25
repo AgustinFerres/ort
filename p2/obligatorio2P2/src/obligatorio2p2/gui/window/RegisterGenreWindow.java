@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Set;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class RegisterGenreWindow extends Window {
 
     private final GenreController controller;

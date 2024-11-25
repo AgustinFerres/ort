@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 
+/**
+ * @author Agustin Ferres - n° 323408
+ */
 public class Select<T> extends JPanel {
 
     public Select (
@@ -12,6 +15,7 @@ public class Select<T> extends JPanel {
         Dimension size,
         int gap
     ) {
+
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(0, gap, 0, gap));
 
